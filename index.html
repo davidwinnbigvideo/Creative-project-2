@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>Creative Project 2</title>
+                <link rel="stylesheet" href="/styles.css">
+        </head>
+        <body>
+                <div class="container">
+                        <br><br><br><br><br>
+                        <h1 class="text-center mt-5">Covid 19 Data Live</h1>    
+                        <table>
+                                <thead>
+                                        <tr>
+                                                <th>Total Cases</th>
+                                                <th>Total Deaths</th>
+                                                <th>Total Recovered</th>        
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr id="data">
+                                        </tr>
+                                </tbody>
+                        </table>
+                        <br>
+                        <button onclick="refreshData()" class="btn btn-danger btn-block">     
+                                Refresh
+                        </button>
+                </div>
+                <br>
+                <div class="results">
+                        <div id="cat_result" class="result">
+                                <p>Random Cat Placeholder</p>
+                        </div>
+                        <div id="dog_result" class="result">
+                                <p>Random Dog Placeholder</p>
+                        </div>
+                </div>
+                <div class="buttons">
+                        <button id="cat_btn">Fetch Cat</button>
+                        <button id="dog_btn">Fetch Dog</button>
+                </div>
+        </body>
+        <footer>
+                <div class="myfooter">
+                <p></p>
+                <a href="https://github.com/davidwinnbigvideo/Creative-project-2">Github</a>  
+                </div>
+                <script src="/script.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+                init()
+                function init() {
+                        var url = "https://api.covid19api.com/summary"
+                        $.get(url,function(data){
+                                data =`
+                                        <td>${data.Global.TotalConfirmed}</td>
+                                        <td>${data.Global.TotalDeaths}</td>
+                                        <td>${data.Global.TotalRecovered}</td>
+                                `
+                                $("#data").html(data)
+                        })
+                }
+                function refreshData() {
+                        clearData()
+                        init()
+                }
+                function clearData() {
+                        $("#data").empty()
+                }
+        </script>
+        </footer>
+</html>
